@@ -209,8 +209,8 @@ Scary stuff, what if someone was going through IP ranges and found our origin se
 
 | Method        | Pros           | Cons  |
 | ------------- |:--------------| ------|
-| [Authenticated Origin Pulls](#41---adding-authenticated-origin-pulls-easy) | {::nomarkdown}<ul><li>Easier to setup</li><li>Can use nginx for non Cloudflare hosts</li></ul>{:/} | {::nomarkdown}<ul><li>If your site is only using Cloudflare you just have an exposed web server for no purpose</li></ul>{:/} |
-| [Firewall Blocking](#42---blocking-all-httphttps-traffic-except-for-cloudflare-safest) | {::nomarkdown}<ul><li>Bulletproof, no way for anyone except Cloudflare to access your web server</li></ul>{:/} | {::nomarkdown}<ul><li>Requires a firewall (like ufw) and a cronjob, slightly complicated setup</li><li>Useful for Cloudflare only</li></ul>{:/} |
+| [Authenticated Origin Pulls](#41---adding-authenticated-origin-pulls-easy) | {::nomarkdown}<ul><li>Easier to setup</li><li>Can use nginx for non Cloudflare hosts</li></ul>{:/} | {::nomarkdown}<ul><li>If your site is only using Cloudflare you just have an exposed web server with no purpose</li></ul>{:/} |
+| [Firewall Blocking](#42---blocking-all-httphttps-traffic-except-for-cloudflare-safest) | {::nomarkdown}<ul><li>Safest</li><li>Bulletproof, no way for anyone except Cloudflare to access your web server</li></ul>{:/} | {::nomarkdown}<ul><li>Requires a firewall (like ufw) and a cronjob, slightly complicated setup</li><li>For Cloudflare only. Firewall will drop requests to nginx unless they are from Cloudflare</li></ul>{:/} |
 
 ### 4.1 - Adding Authenticated Origin Pulls (easy) 
 
