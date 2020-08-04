@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How to properly secure your nginx server with Cloudflare and stop it from leaking"
+title:  "How to properly secure your nginx server with Cloudflare and stop it from leaking your origin IP address"
 date:   2020-08-03 14:42:00 +1000
 categories: nginx
 ---
