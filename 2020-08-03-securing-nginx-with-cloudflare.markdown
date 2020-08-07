@@ -172,11 +172,11 @@ As you can see the config has no HTTP support, this is because Cloudflare can do
 
 ```
 server {
-    listen 80;
-    listen [::]:80;
+	listen 80;
+	listen [::]:80;
 
-    server_name testing.jfx.ac;
-    return 302 https://$server_name$request_uri;
+	server_name testing.jfx.ac;
+	return 302 https://$server_name$request_uri;
 }
 ```
 
@@ -207,7 +207,7 @@ Hello World!
 
 Scary stuff, what if someone was going through IP ranges and found our origin server this way? There's actually a few ways to stop this, but the easiest way to stop this is to implement Authenticated Origin Pulls! More information is [here from Cloudflare themselves](https://blog.cloudflare.com/protecting-the-origin-with-tls-authenticated-origin-pulls). You can also block all HTTP/HTTPS traffic to your box unless it's from Cloudflare using a firewall (such as UFW), this step is also explained but there are pros and cons for this which are listed below.
 
-| Method        | Pros           | Cons  |
+| Method		| Pros		   | Cons  |
 | ------------- |:--------------| ------|
 | [Authenticated Origin Pulls](#41---adding-authenticated-origin-pulls-easy) | {::nomarkdown}<ul><li>Easier to setup</li><li>Can use nginx for non Cloudflare hosts</li></ul>{:/} | {::nomarkdown}<ul><li>If your site is only using Cloudflare you just have an exposed web server with no purpose</li></ul>{:/} |
 | [Firewall Blocking](#42---blocking-all-httphttps-traffic-except-for-cloudflare-safest) | {::nomarkdown}<ul><li>Safest</li><li>Bulletproof, no way for anyone except Cloudflare to access your web server</li></ul>{:/} | {::nomarkdown}<ul><li>Requires a firewall (like ufw) and a cronjob, slightly complicated setup</li><li>For Cloudflare only. Firewall will drop requests to nginx unless they are from Cloudflare</li></ul>{:/} |
