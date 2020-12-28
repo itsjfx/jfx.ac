@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "How to secure your nginx origin server with Cloudflare to stop any origin leaks"
+title:  "How to secure your nginx + Cloudflare configuration to stop any origin leaks"
 date:   2020-08-03 14:42:00 +1000
-modified_date: 2020-12-29 02:05:00 +1000
+modified_date: 2020-12-29 02:26:00 +1000
 author: Thomas
 categories: nginx security
 redirect_from:
