@@ -5,6 +5,8 @@ date:   2020-08-03 14:42:00 +1000
 modified_date: 2020-12-29 02:05:00 +1000
 author: Thomas
 categories: nginx security
+redirect_from:
+  - /securing-nginx-with-cloudflare.html
 ---
 I decided to write this as although a lot of guides on the internet provide a solid configuration for an nginx server, most of these guides will result in an IP leak somewhere under their configuration for the origin server somewhere.
 
