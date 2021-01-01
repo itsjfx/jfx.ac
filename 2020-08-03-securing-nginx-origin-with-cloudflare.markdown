@@ -4,7 +4,7 @@ title:  "How to secure your nginx + Cloudflare configuration to stop any origin 
 date:   2020-08-03 14:42:00 +1000
 modified_date: 2020-12-29 02:26:00 +1000
 author: Thomas
-categories: nginx security
+categories: nginx security guide
 redirect_from:
   - /securing-nginx-with-cloudflare.html
 ---
