@@ -43,7 +43,7 @@ Once there click "Create policy" and complete the following steps in the "Visual
 2. Under Actions
 	1. Under "List" select "ListBucket"
 	2. Under "Read" select "GetBucketLocation" and "GetObject"
-	3. Under "Write" select "DeleteBucket", "DeleteBucketVersion" and "PutObject"
+	3. Under "Write" select "DeleteObject", "DeleteObjectVersion" and "PutObject"
 3. Under Resources
 	1. Select "Specific" as the type of resource
 	2. Click "Add ARN" for bucket
