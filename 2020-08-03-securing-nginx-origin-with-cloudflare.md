@@ -28,7 +28,7 @@ This is a step that many guides on the internet do not do and instead they ask y
 
 The reason why is because of this screenshot below.
 
-![Cloudflare Certificate Leak](/assets/img/cloudflare-cert-leak.png)
+![Cloudflare Certificate Leak](/assets/img/securing-nginx-origin-with-cloudflare/cloudflare-cert-leak.png)
 
 As you can see although no content is sent, the origin address of the website is exposed by the certificate being sent to the user. A simple web scraper could check the DNS of the certificate and easily expose the origin servers IP address.
 
@@ -78,7 +78,7 @@ Then type ```sudo nginx -t``` to make sure your configuration is correct before 
 
 This provides us with a base setup. If a request comes to the origin server and it does not have a server block it will come back as 403. Try test it out by going to the IP address of your box on http:// and https://
 
-![403 Shown](/assets/img/403-shown.png)
+![403 Shown](/assets/img/securing-nginx-origin-with-cloudflare/403-shown.png)
 
 # Step 3 - Configuring a host
 
@@ -219,7 +219,7 @@ Scary stuff, what if someone was going through IP ranges and found our origin se
 
 Firstly, make sure this feature is enabled on Cloudflare or the following steps will break your site. To enable it, go to Cloudflare and go to **SSL/TLS -> Origin Server -> ON for Authenticated Origin Pulls**:
 
-![Cloudflare Authenticated Origin Pulls On](/assets/img/authenticated-origin-pulls-on.png)
+![Cloudflare Authenticated Origin Pulls On](/assets/img/securing-nginx-origin-with-cloudflare/authenticated-origin-pulls-on.png)
 
 Next to setup Authenticated Origin Pulls on nginx, [go here](https://support.cloudflare.com/hc/en-us/articles/204899617) and at the bottom of the page download the ```origin-pull-ca.pem``` file. Once downloaded, copy its contents and output it to ```/etc/ssl/certs/cloudflare-origin.pem```
 
@@ -338,8 +338,8 @@ To install the README does a good job of explaining, but essentially if you run 
 
 Not related to nginx specifically (hence why it's down here), but these are settings which are good to have on for your website in Cloudflare. Go to **SSL/TLS->Edge Certificates** to enable them:
 
-![Cloudflare SSL Settings 1](/assets/img/cloudflare-ssl-settings-1.png)
-![Cloudflare SSL Settings 2](/assets/img/cloudflare-ssl-settings-2.png)
+![Cloudflare SSL Settings 1](/assets/img/securing-nginx-origin-with-cloudflare/cloudflare-ssl-settings-1.png)
+![Cloudflare SSL Settings 2](/assets/img/securing-nginx-origin-with-cloudflare/cloudflare-ssl-settings-2.png)
 
 Feel free to **turn HSTS on for subdomains**, I have it off since I do testing stuff on some of my subdomains, but it's **good practice to have on!**
 
@@ -358,7 +358,7 @@ http {
 
 After restarting nginx **sudo nginx -t and sudo systemctl restart nginx** any "bad" page or 404 error, etc, should now look like this:
 
-![server-tokens-off](/assets/img/server-tokens-off.png)
+![server-tokens-off](/assets/img/securing-nginx-origin-with-cloudflare/server-tokens-off.png)
 
 ### Blocking any ports you reverse proxy from being public
 
