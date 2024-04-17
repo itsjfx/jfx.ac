@@ -1,0 +1,16 @@
+baseURL = "https://jfx.ac/"
+title = "jfx's site"
+description = "my personal website"
+pygmentsUseClasses = true
+# uglyurls = true
+disablePathToLower = false
+rssLimit = 10
+
+[permalinks]
+blog = "/blog/:filename"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.tableOfContents]
+ordered = true

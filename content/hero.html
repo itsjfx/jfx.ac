@@ -1,0 +1,38 @@
+---
+title: Dota 2 Random Hero Picker
+description: Dota 2 Random Hero Picker / Spin to random hero
+layout: page
+---
+<div class="container">
+    <article style="text-align: center;">
+        <p>Just press the button below to get a random hero!</br></p>
+        <button type="button" class="btn btn-primary btn-lg" onclick="getHero()">Random Hero</button><br>
+        <div id="hero-wrapper" style="display: none;">
+            <img id="hero-img" src="" alt="Hero">
+            <p id="hero-name"></p>
+        </div>
+    </article>
+</div>
+
+<script>
+    function displayHero() {
+        const herolist = JSON.parse(sessionStorage.herolist);
+        const hero = herolist[Math.floor(Math.random() * herolist.length)];
+        document.getElementById("hero-img").src = `images/${hero}.png`;
+        document.getElementById("hero-name").textContent = hero;
+        document.getElementById("hero-wrapper").style.display = "block";
+    }
+
+    async function getHero() {
+        if (sessionStorage.herolist) {
+            displayHero();
+        } else {
+            const response = await fetch('heroes.txt');
+            if (!response.ok) {
+                throw new Error(`request to: ${response.url} failed with code: ${response.status}`);
+            }
+            const data = await response.text();
+            sessionStorage.herolist = JSON.stringify(data.split("\n"));
+        }
+    }
+</script>

@@ -1,0 +1,50 @@
+{{ partial "head.html" . }}
+
+<body>
+
+  <main class="index">
+    <section class="article-list">
+      <h1>{{$.Title}}</h1>
+
+      {{ range (where .Site.RegularPages "Section" "blog") }}
+      <div class="article">
+        <span class="date">{{.Date.Format "January 2, 2006"}}</span>
+        <a href="{{.Permalink}}">{{.Title}}</a>
+      </div>
+      {{ end }}
+    </section>
+
+    <aside>
+      <img src="img.jpg" alt="Innerspeaker" width="148" height="148" />
+
+      <div class="text-center">
+        <a href="about">about</a>
+        ·
+        <a href="https://notes.jfx.ac">notes</a>
+        ·
+        <a class="rss" href="/blog/index.xml">rss</a>
+        ·
+        <a href="hero">hero picker</a>
+      </div>
+
+      <dl class="external-links">
+        <dt>email</dt>
+        <dd><a href="mailto:me@jfx.ac">me@jfx.ac</a></dd>
+        <dt>github</dt>
+        <dd><a href="https://github.com/itsjfx">itsjfx</a></dd>
+        <!-- <dt>public notes</dt>
+      <dd><a href="https://notes.jfx.ac">notes.jfx.ac</a></dd> -->
+        <dt>pgp</dt>
+        <dd><a href="/publickey.txt">17FE13EC5D1B9055</a></dd>
+      </dl>
+
+      <small>
+      </small>
+    </aside>
+  </main>
+
+  {{ partial "foot.html" . }}
+
+</body>
+
+</html>
