@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
+export HUGO_ENVIRONMENT=production
+export HUGO_ENV=production
 cd "$(dirname "$0")"/../ && \
-hugo --minify --cleanDestinationDir --gc
+hugo --minify --cleanDestinationDir --gc "$@"
