@@ -11,10 +11,9 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
-# Default to bash
 defaults:
   run:
     shell: bash
@@ -25,12 +24,12 @@ jobs:
     env:
       HUGO_VERSION: 0.124.1
     steps:
-      - name: Install Hugo CLI
+      - name: get hugo extended
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
 
-      - name: Install Dart Sass
+      - name: get dart-sass
         run: sudo snap install dart-sass
 
       - name: checkout
@@ -39,14 +38,11 @@ jobs:
       - name: pages
         id: pages
         uses: actions/configure-pages@v5
-      - name: Install Node.js dependencies
-        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
 
       - name: build
         env:
           URL: ${{ steps.pages.outputs.base_url }}
-        run: |
-          ./bin/build --baseURL "$URL/"
+        run: ./bin/build --baseURL "$URL/"
 
       - name: upload
         uses: actions/upload-pages-artifact@v3
@@ -55,12 +51,12 @@ jobs:
 
   # Deployment job
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
-      - name: Deploy to GitHub Pages
+      - name: deploy to github pages
         id: deployment
         uses: actions/deploy-pages@v4
