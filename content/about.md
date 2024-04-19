@@ -43,6 +43,8 @@ light as possible (with no JavaScript!). I'm still undecided on the site's
 design, so I've gone with the most plain thing possible (maybe too plain!) and
 I'll build it up.
 
+The source code is [available here](https://github.com/itsjfx/jfx.ac).
+
 If I don't have time to write a blog post but want people to know about
 something, I've probably published a public note! See
 [notes.jfx.ac](https://notes.jfx.ac) for my public notes.
