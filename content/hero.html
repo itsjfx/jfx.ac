@@ -33,6 +33,7 @@ layout: page
             }
             const data = await response.text();
             sessionStorage.herolist = JSON.stringify(data.split("\n"));
+            displayHero();
         }
     }
 </script>
