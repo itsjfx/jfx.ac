@@ -171,9 +171,9 @@ func Generate(limit int) iter.Seq2[Pokemon, error] {
                 yield(Pokemon{}, err)
                 return
             }
-            defer response.Body.Close()
 
             err = json.NewDecoder(response.Body).Decode(&data)
+            response.Body.Close()
             if err != nil {
                 yield(Pokemon{}, err)
                 return
