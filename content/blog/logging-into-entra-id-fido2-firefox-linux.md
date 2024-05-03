@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Logging into Entra ID via FIDO2 with Firefox on Linux
+title: How to login to Entra ID via FIDO2 with Firefox on Linux
 date: 2024-04-02
 tags: [fido2, entra, azure, firefox, linux]
 ---
@@ -10,12 +10,13 @@ tags: [fido2, entra, azure, firefox, linux]
 Entra ID (formerly Azure AD) is a widely used IDP in many enterprise
 environments. Despite [Mozilla enabling FIDO2 support by default (as of
 114.0)](https://www.mozilla.org/en-US/firefox/114.0/releasenotes), you cannot
-login to Entra ID with Firefox on Linux.
+login to Entra ID with Firefox on Linux out of the box.
 
 The two are listed as incompatible [in Microsoft's
 documentation](https://learn.microsoft.com/en-us/entra/identity/authentication/concept-fido2-compatibility#web-browser-support),
-but Chromium on Linux works fine. After some digging, I've found that Firefox
-works with simple workarounds.
+but Chromium on Linux works fine.
+
+After some digging, I've found that Firefox works with simple workarounds.
 
 ## Workarounds
 
@@ -122,8 +123,8 @@ error](/assets/blog/entra-id-fido2-firefox-linux/token-error.png)
 
 At this stage I had a pretty big hunch that I was on the right path, I'd just
 need to figure out what variables are needed. It could be a combination of
-variables being missing, or variables having different values (e.g. a `false`
-on Firefox, but a `true` on Chromium).
+variables being missing, or variables having different values (e.g. a `false` on
+Firefox, but a `true` on Chromium).
 
 The `$Config` JSON was 629 lines long, but not difficult to brute-force.
 Inspired by [git bisect](https://git-scm.com/docs/git-bisect) and binary search
