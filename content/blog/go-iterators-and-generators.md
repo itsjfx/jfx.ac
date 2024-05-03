@@ -134,7 +134,6 @@ func main() {
 }
 ```
 
-
 ### an example with http
 
 Here's an example hitting a paginated HTTP endpoint and yielding the data.
