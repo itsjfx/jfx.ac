@@ -137,45 +137,10 @@ article {
 }
 
 pre {
-  background-color: #eee;
   padding: 0.25rem 1rem;
   margin: 0 -1rem;
   max-width: 100%;
   overflow-x: auto;
-
-  .cp {
-    color: #800;
-  }
-
-  .k {
-    color: #008;
-  }
-
-  .kt, .kd, .kc {
-    color: #44F;
-  }
-
-  .s {
-    color: #484;
-    font-style: italic;
-  }
-
-  .cm, .c1 {
-    color: #333;
-    font-style: italic;
-  }
-
-  .gi {
-    color: green;
-  }
-
-  .gd {
-    color: red;
-  }
-
-  .gu {
-    color: blue;
-  }
 }
 
 .webring {
