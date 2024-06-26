@@ -7,7 +7,7 @@ tags: [robot, vacuum, hacking, root]
 
 ## Important Notice
 
-I'm not writing this to sell the idea of hacking your robot, but to give a lens into robot hacking and the work being done. If you're reading this blog, chances are you might find this interesting, and may consider in the future after doing heavy research and understanding of your own to hack your robot.
+I'm not writing this to sell the idea of hacking your robot, but to give a lens into robot hacking and the work being done. If you're reading this blog, chances are you might find this interesting, and after doing heavy research may consider to hack your own robot vacuum.
 
 Please do your research and understand the goals of hacking your robot and how to do it before you try.
 
