@@ -16,7 +16,7 @@ scripts/automations so myself and others spend less time doing mundane things.
 I've been programming since I was a kid writing
 [Batch](https://en.wikipedia.org/wiki/Batch_file), and websites in [HTML](https://en.wikipedia.org/wiki/HTML) & [PHP](https://en.wikipedia.org/wiki/PHP).
 
-The language I spent a lot of time learning was
+The first language I spent a lot of time learning was
 [Pawn](https://www.compuphase.com/pawn/pawn.htm), which had C-like syntax,
 before moving onto learning Python 2.
 
