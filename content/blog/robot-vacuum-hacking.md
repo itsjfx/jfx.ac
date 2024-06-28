@@ -45,7 +45,9 @@ Below is a hardware breakdown diagram from the same talk mentioned earlier.
 
 ### The SoC
 
-The system on a chip (SoC) is the application processor which handles navigation, mapping and networking. It typically runs Linux. Custom vendor software runs on the robot as a daemon and does most of the heavy lifting handling cloud communication, OTA, robot control, mapping, and other user facing functions.
+The system on a chip (SoC) is the application processor which handles navigation, mapping and networking. It typically runs Linux.
+
+Custom vendor software runs on the robot as a daemon and does most of the heavy lifting handling cloud communication, OTA, robot control, mapping, and other user facing functions. On Dreame this software is called [ava](https://github.com/alufers/dreame_mcu_protocol/blob/master/dreame_z10_notes.md#ava-nodes), and on Ecovacs it's called [medusa](https://dontvacuum.me/talks/37c3-2023/37c3-vacuuming-and-mowing.pdf).
 
 Some interesting things I found:
 * Some vendors have a lot of shell scripts with poor bash/shell scripting practices which get called on the SoC. These scripts may interact with the OS, handle WiFi (e.g. interact with `wpa_supplicant`), or interact with the custom vendor software.
