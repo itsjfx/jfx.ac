@@ -18,10 +18,10 @@ I've been programming since I was a kid writing
 
 The first language I spent a lot of time learning was
 [Pawn](https://www.compuphase.com/pawn/pawn.htm), which had C-like syntax,
-before moving onto learning Python 2.
+before moving onto learning Python 2. I've been using Node since Node 4 
+and enjoyed watching JavaScript/ECMAScript mature over time.
 
-Now days I enjoy doing things in TypeScript, Python & Bash. I've been using Node
-since Node 4 and enjoyed watching JavaScript/ECMAScript mature over time. 
+Now days I enjoy doing things in TypeScript, Python & Bash.
 
 I have a keen interest in reverse-engineering, and using this skill to make
 things do things they're not supposed to do, or building wrappers around things
