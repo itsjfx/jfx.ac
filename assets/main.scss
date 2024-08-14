@@ -115,7 +115,8 @@ article {
         // !important for asciinema frames
         display: block !important;
         margin: 0 auto !important;
-        max-width: 90%;
+        // potentially dangerous
+        max-width: 120%;
 
         @media(max-width: 640px) {
             max-width: calc(100% - #{$footer_height});
