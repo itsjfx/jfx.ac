@@ -21,9 +21,9 @@ Despite the complexity, in a StackOverflow 2023 survey, Vim was voted the [5th m
 
 ### Neovim
 
-[Neovim](https://en.wikipedia.org/wiki/Vim_(text_editor)#Neovim) is a fork of Vim that strives to improve the extensibility and maintainability of Vim. Neovim supports Lua scripting in addition to VimScript, making it more easier for the community to extend the editor. You can [learn more here](https://neovim.io/charter) about the vision of Neovim.
+[Neovim](https://en.wikipedia.org/wiki/Vim_(text_editor)#Neovim) is a fork of Vim that strives to improve the extensibility and maintainability of Vim. Neovim supports Lua scripting in addition to VimScript, making it easier for the community to extend the editor. You can [learn more here](https://neovim.io/charter) about the vision of Neovim.
 
-Compared to Vim, it has new powerful features such as: a well documented API, job-control, LSP support, built-in parser support, [and more](https://neovim.io/doc/user/vim_diff.html). Overall it also feels more community-focused than Vim.
+Compared to Vim, it has new powerful features such as: a well documented API, job-control, LSP support, built-in parser support, [and more](https://neovim.io/doc/user/vim_diff.html). Overall it feels more community-focused than Vim.
 
 In the StackOverflow survey mentioned earlier, it was voted the [10th most popular text editor](https://survey.stackoverflow.co/2023/#most-popular-technologies-new-collab-tools), however it was [the most admired editor](https://survey.stackoverflow.co/2023/#integrated-development-environment).
 
