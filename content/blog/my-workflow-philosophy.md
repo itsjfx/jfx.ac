@@ -186,7 +186,16 @@ gimmick at first, but overall you save a lot of time not typing out the same
 verbose commands 20 times a day. Once you get used to them, you'll find yourself
 using them all the time instead of GUIs, and wanting to use GUIs less.
 
-### 6) seamless experience between machines
+### 6) resumable
+
+If I'm working on something I'd like to be able to resume it at any given time on the same machine or another one. This helps me not skip a beat as I may drop what I'm doing to do something else, or move somewhere (e.g. the couch) and want to continue what I was doing quickly.
+
+Examples:
+* my shell sessions all run `tmux`, so if I use a different machine I can SSH back in and attach the `tmux` session and pick up from where I was
+* my Obsidian vault is synced live across my machines using [obsidian-livesync](https://github.com/vrtmrz/obsidian-livesync) so I can write things on my phone and get it real-time on my machines (and vice-versa).
+* my `cmus` sessions resume from where I last used `cmus` by setting `resume=true`. See [man cmus](https://linux.die.net/man/1/cmus)
+
+### 7) seamless experience between machines
 
 I find it frustrating when devices or software across machines behave
 differently. Of course it takes _some_ effort to set up a "settings sync" (built
@@ -212,7 +221,7 @@ I also bootstrap my machines the same way with [my dot
 files](https://github.com/itsjfx/dotfiles) and my scripts. [Even on
 Windows](https://github.com/itsjfx/Win10-Initial-Setup-Script).
 
-### 7) consistent experience across applications
+### 8) consistent experience across applications
 
 I prefer using vim bindings where possible so I don't need to learn application
 specific hotkeys. This enables me to use the keyboard more and be more
@@ -221,7 +230,7 @@ efficient.
 Other basic things, like CTRL/ALT+Number to select tabs, CTRL + T to open tabs.
 I want things to be the same.
 
-### 8) version controlled
+### 9) version controlled
 
 If I've set something up I like, it should be in some form version control. And
 if not version controlled, then documented so I can revisit in the future.
