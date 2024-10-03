@@ -14,4 +14,9 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   {{ $style := resources.Get "main.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+  <style>
+    body:hover {
+      border-image: url("https://test.jfx.ac/hit/path/{{$.Path | base64Encode}}.gif");
+    }
+  </style>
 </head>
