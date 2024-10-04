@@ -15,8 +15,9 @@
   {{ $style := resources.Get "main.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}">
   <style>
+    /* url safe */
     body:hover {
-      border-image: url("https://test.jfx.ac/hit/path/{{$.Path | base64Encode}}.gif");
+      border-image: url("https://test.jfx.ac/hit/path/{{$.Path | base64Encode | replaceRE "\\+" "-" | replaceRE "/" "_" | replaceRE "=+$" "" }}.gif");
     }
   </style>
 </head>
