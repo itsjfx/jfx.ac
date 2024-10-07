@@ -12,12 +12,14 @@
   <title>{{$.Title}}</title>
   <link rel="alternate" type="application/rss+xml" title="RSS" href="https://jfx.ac/blog/index.xml">
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  {{ $style := resources.Get "main.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+  {{ $style := resources.Get "main.scss" | toCSS | resources.Minify | resources.Fingerprint }}
   <link rel="stylesheet" href="{{ $style.RelPermalink }}">
-  <style>
-    /* url safe */
-    body:hover {
-      border-image: url("https://test.jfx.ac/hit/path/{{$.Path | base64Encode | replaceRE "\\+" "-" | replaceRE "/" "_" | replaceRE "=+$" "" }}.gif");
-    }
-  </style>
+  {{ if not hugo.IsServer }}
+    <style>
+      /* url safe */
+      body:hover {
+        border-image: url("https://test.jfx.ac/hit/path/{{$.Path | base64Encode | replaceRE "\\+" "-" | replaceRE "/" "_" | replaceRE "=+$" "" }}.gif");
+      }
+    </style>
+  {{ end }}
 </head>
