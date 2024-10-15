@@ -19,9 +19,9 @@ for hero in $(comm -3 <(echo "$heroes" | cut -f2 | sort -u) <(echo "$files")); d
     short_name="$(<<<"$heroes" grep "$hero" | cut -f1)"
     filepath="static/hero/images/$hero.png"
     curl -sSf "https://cdn.akamai.steamstatic.com/apps/dota2/images/dota_react/heroes/$short_name.png" -o "$filepath"
-    echo "Downloaded $hero.png, running pngquant"
+    echo "Downloaded $hero.png, running pngquant" >&2
     pngquant --speed 1 --strip --ext .png --force "$filepath"
     echo "$hero" >> static/hero/heroes.txt
     sort -u -o static/hero/heroes.txt static/hero/heroes.txt
-    echo "Finished processing: $hero"
+    echo "Finished processing: $hero" >&2
 done
