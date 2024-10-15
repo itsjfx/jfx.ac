@@ -7,41 +7,43 @@ tags: [robot, vacuum, hacking, root]
 
 ## Important Notice
 
-I'm not writing this to sell the idea of hacking your robot, but to give a lens into robot hacking and the work being done. If you're reading this blog, chances are you might find this interesting, and after doing heavy research may consider to hack your own robot vacuum.
+I'm writing this post to give a lens into robot hacking and the work being done by the community. This is not aimed to sell the idea of hacking your robot. That said you might find this an interesting read and after heavy research may consider to hack your own robot vacuum.
 
-Please do your research and understand the goals of hacking your robot and how to do it before you try.
+Please do your research and understand the goals and risks of hacking your robot before you try.
 
 ## Introduction
 
-This is a long post on things I wish I knew about robot vacuums and robot hacking earlier. This is not a replacement for existing documentation or help guides. If you only care about rooting your robot and freeing it for the cloud, and don't care about how the robot works, chances are this post won't be that helpful to you.
+This is a long post on things I wish I knew earlier about hacking robot vacuums. This is not a replacement for existing documentation or help guides. If you only care about rooting your robot and freeing it for the cloud and don't care about how the robot works, chances are this post won't be that helpful to you.
 
-Earlier this month, I installed custom firmware and a cloud replacement on a second [Dreame L10s Ultra robot vacuum](https://www.dreametech.com/products/dreamebot-l10s-ultra). Also released this month was root and cloud-replacement support for the new [Dreame X40 Ultra](https://www.dreametech.com/products/dreametech-x40-ultra-robot-vacuum) and [Dreame L10s Pro Ultra Heat](https://robotinfo.dev/detail_dreame.vacuum.r2338a_0.html), so it's certainly still an exciting time to get into robot hacking!
+Earlier this month, I installed custom firmware and a cloud replacement on a second [Dreame L10s Ultra robot vacuum](https://www.dreametech.com/products/dreamebot-l10s-ultra). Also released this month (2024-June) was root and cloud-replacement support for the new [Dreame X40 Ultra](https://www.dreametech.com/products/dreametech-x40-ultra-robot-vacuum) and [Dreame L10s Pro Ultra Heat](https://robotinfo.dev/detail_dreame.vacuum.r2338a_0.html), so it's certainly still an exciting time to get into robot hacking!
 
-In this post I'll quickly cover about my views on robot vacuums, the robot hardware, the hacking community, the software, and then talk briefly about my experiences. Feel free to skip over my preamble into robot vacuums (or this entire post, haha) if you're not interested.
+I'll quickly cover about my views on robot vacuums, the robot hardware, the hacking community, the software, and write briefly about my experiences. Feel free to skip over my preamble into robot vacuums if you're not interested.
 
 ## Why am I crazy about robot vacuums?
 
-I believe a robot vacuum is a great purchase as you can only vacuum and mop your home so much. Dust builds up very quickly, unless you're regularly vacuuming your home daily you'll find that it'll travel across the house across more surfaces.
+Robot vacuums are a great purchase as you can only vacuum and mop your home so much. Dust builds up very quickly and unless you're regularly vacuuming your home daily, you'll find that dust will travel across the house onto more surfaces.
 
-Now days robots have mop heads which spin at fast speeds to get your floors clean. They can take in clean water from a tank in a dock which reduces the amount of times you need to fill it up, use detergent, can clean and dry the mop heads, and empty the dirty water into a secondary water tank for you to empty.
+Modern robots have advanced mop heads which spin at fast speeds to get your floors clean. They can take in clean water from a water tank in the dock, use detergent, self-clean & dry the mop, and empty the dirty water into a secondary dirty water tank for you to empty into your drain.
 
 The mop means my hardwood floors are shiny which makes me happy. I find mopping tiring so it helps relieve some physical hardship.
 
-I also got a robot for my elderly parents which helps reduce physical effort needed by them to maintain a tidy house. It's a great piece of **luxury hardware** if you can justify spending the money on them.
+I also got a robot for my elderly parents which helps reduce physical effort needed by them to maintain a tidy house. It's a great piece of **luxury hardware** if you can justify spending the money on one.
 
 ## Why am I also unhappy with robot vacuums?
 
 One of the main factors is privacy. As a consumer you place a lot of trust on the vendor. You don't have any control of the software running on the robot. It requires internet access, has cameras, sensors, and local AI models equipped.
 
-These aren't crazy concerns to have. If you watch [Dennis Giese & braelynn's talk at 37C3](https://www.youtube.com/watch?v=56N1dYfdVf4), they discuss with a specific vendor some user data is publicly accessible, remains on cloud servers past account deletion, and remains on the robot past factory reset. The same vendors robots software avoids TLS checks as they have shell scripts with  `wget --no-check-certificate` in the firmware. Additionally they showcased an exploit where the live video feed for a robot is accessible under certain conditions as a pin check is enforced client side in the application.
+These aren't crazy concerns to have. If you watch [Dennis Giese & braelynn's talk at 37C3](https://www.youtube.com/watch?v=56N1dYfdVf4), they showcase that robots made by a specific vendor have user data which is publicly accessible, remains on cloud servers past account deletion, and remains on the robot past factory reset. The same vendors robots software avoids TLS checks as they have shell scripts with  `wget --no-check-certificate` in the firmware. Additionally they showcased an exploit where the live video feed for a robot is accessible under certain conditions as a pin check is enforced client side in the application.
 
 Other than privacy, you may not want a robot due to high cost, messy or uneven flooring, or carpet, which in recent years is less of an issue due to detachable mop vacuums.
+
+Update: Dennis Giese published a zero-touch RCE via BLE for the same vendors robot. An article is available here showcasing the exploit: <https://www.abc.net.au/news/2024-10-04/robot-vacuum-hacked-photos-camera-audio/104414020>
 
 ## Robot hardware breakdown
 
 Below is a hardware breakdown diagram from the same talk mentioned earlier.
 
-![Hardware Architecture](/assets/blog/robot-vacuum-hacking/hardware-architecture.png)
+{{< image src="/assets/blog/robot-vacuum-hacking/hardware-architecture.png" >}}
 
 ### The SoC
 
@@ -84,7 +86,7 @@ The community seems to be broken down to the following groups of people:
 * People interested in the firmware on the MCU
 
 There are many people who contribute greatly in the community, but it boils down to these two people (who are the most public):
-* [Dennis Giese](https://dontvacuum.me/), a PhD student at [Northeastern University](https://www.neu.edu)
+* [Dennis Giese](https://dontvacuum.me/), an IoT researcher
     * Dennis maintains [Dustbuilder](https://dustbuilder.dontvacuum.me/), a website which allows you to create custom rooted firmware for robot vacuums
     * Dennis also maintains the [Robot Info website](https://robotinfo.dev/)  (mentioned earlier)
     * Dennis and others discover root methods, gain persistence, and verify vendor claims
@@ -138,13 +140,22 @@ I'm not going to write about why or why not to use Valetudo. If this got your in
 
 ## My rooting journey
 
-I followed the Dreame fastboot instructions for both my Dreame L10s Ultra's. The robot is slowly approaching end of life, so I was lucky to get it on sale. I couldn't easily obtain the Valetudo rooting PCB board, so I used some dupont cables and an old USB mouse with a USB 2.0 cable (rip mouse). It worked OK minus some USB 2.0 shenanigans. If I could do it again, I would put the effort in to obtain the PCB board, as I probably wasted 2 hours getting the USB connection to work correctly.
+I followed the Dreame fastboot instructions for both my Dreame L10s Ultra's. The robot is slowly approaching end of life so I was lucky to get it on sale. I couldn't easily obtain the Valetudo rooting PCB board so I used some dupont cables and an old USB mouse with a USB 2.0 cable (rip mouse). It worked OK minus some USB 2.0 shenanigans. If I could do it again, I would put the effort in to obtain the PCB board as I probably wasted 2 hours getting the USB connection to work correctly.
 
-I previously had a Roborock S6 MaxV which I couldn't root, and faced many issues getting the Home Assistant integration working. Occasionally the vendor would rate limit my Home Assistant integration or change their API, meaning I'd have to wait for the maintainer of the integration to address the issue. I've not faced any issues with my L10s Ultra and Valetudo due to its native MQTT client and Home Assistant support. The robot has not skipped a beat and is far more responsive than my previous vendor cloud locked Roborock. I also have no internet calls coming out of my robot (using a NTP server on my LAN), so I'm super pleased with that.
+I previously had a Roborock S6 MaxV which I couldn't root and faced many issues getting the Home Assistant integration working. Occasionally the vendor would rate limit my Home Assistant integration or change their API, meaning I'd have to wait for the maintainer of the integration to address the issue. I've not faced any issues with my L10s Ultra and Valetudo due to its native MQTT client and Home Assistant support. The robot has not skipped a beat and is far more responsive than my previous vendor cloud locked Roborock. I also have no internet calls coming out of my robot (using a NTP server on my LAN), so I'm super pleased with that.
 
 ## What's upcoming in the community?
 
 In Dennis Giese's recent talk he covered Ecovacs vacuums. The root method for many models is now public, however there is no Valetudo support for them right now. Please do not ask the maintainers when they will supported. We can only hope there'll be Valetudo support in the future or a cloud replacement for these robots.
+
+## Update
+
+I spent a month hacking my Ecovacs X1 Omni. I published some notes and a forked version of Valetudo which works on my robot.
+
+See the links below:
+* <https://github.com/itsjfx/ecovacs-hacking>
+* <https://github.com/itsjfx/ValetudoEV>
+    * <https://github.com/itsjfx/ValetudoEV/blob/master/ValetudoEV.md>
 
 ## See also
 
