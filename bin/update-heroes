@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -eu -o pipefail
+
+cd "$(dirname "$0")/../"
+
+# friggin CORS
+# download the stuff and store it in the repo
+# and abuse cloudflare caching policies
+heroes="$(
+    curl -sSf 'https://www.dota2.com/datafeed/herolist?language=english' -H 'Accept: application/json' \
+    | jq -re '.result.data.heroes[] | [(.name | gsub("npc_dota_hero_"; "")), .name_english_loc] | @tsv'
+)"
+files="$(find static/hero/images -maxdepth 1 -type f -printf "%f\n" | sed 's/\.png//' | sort -u)"
+
+for hero in $(comm -3 <(echo "$heroes" | cut -f2 | sort -u) <(echo "$files")); do
+    echo "Downloading hero: $hero" >&2
+    # ideally it should be map, but this is a quick bash script
+    short_name="$(<<<"$heroes" grep "$hero" | cut -f1)"
+    filepath="static/hero/images/$hero.png"
+    curl -sSf "https://cdn.akamai.steamstatic.com/apps/dota2/images/dota_react/heroes/$short_name.png" -o "$filepath"
+    echo "Downloaded $hero.png, running pngquant"
+    pngquant --speed 1 --strip --ext .png --force "$filepath"
+    echo "$hero" >> static/hero/heroes.txt
+    sort -u -o static/hero/heroes.txt static/hero/heroes.txt
+    echo "Finished processing: $hero"
+done

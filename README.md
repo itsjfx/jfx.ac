@@ -11,3 +11,7 @@ DeVault's blog](https://drewdevault.com) which is
 ## Running locally
 
 `bash bin/serve`
+
+## Updating heroes
+
+`bash bin/update-heroes`
