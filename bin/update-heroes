@@ -13,10 +13,9 @@ heroes="$(
 )"
 files="$(find static/hero/images -maxdepth 1 -type f -printf "%f\n" | sed 's/\.png//' | sort -u)"
 
-for hero in $(comm -3 <(echo "$heroes" | cut -f2 | sort -u) <(echo "$files")); do
-    echo "Downloading hero: $hero" >&2
-    # ideally it should be map, but this is a quick bash script
-    short_name="$(<<<"$heroes" grep "$hero" | cut -f1)"
+# use some awk that the internet helped with
+awk -F'\t' 'NR==FNR {missing[$0]; next} !($2 in missing)' <(echo "$files") <(echo "$heroes") | while read -r short_name hero; do
+    echo "Downloading hero: $hero with short name: $short_name" >&2
     filepath="static/hero/images/$hero.png"
     curl -sSf "https://cdn.akamai.steamstatic.com/apps/dota2/images/dota_react/heroes/$short_name.png" -o "$filepath"
     echo "Downloaded $hero.png, running pngquant" >&2
