@@ -15,9 +15,12 @@ layout: page
 </div>
 
 <script>
+    HEROES = null;
     function displayHero() {
-        const herolist = JSON.parse(sessionStorage.herolist);
-        const hero = herolist[Math.floor(Math.random() * herolist.length)];
+        if (!HEROES) {
+            HEROES = JSON.parse(sessionStorage.herolist);
+        }
+        const hero = HEROES[Math.floor(Math.random() * HEROES.length)];
         document.getElementById("hero-img").src = `images/${hero}.png`;
         document.getElementById("hero-name").textContent = hero;
         document.getElementById("hero-wrapper").style.display = "block";
@@ -31,8 +34,11 @@ layout: page
             if (!response.ok) {
                 throw new Error(`request to: ${response.url} failed with code: ${response.status}`);
             }
-            const data = await response.text();
-            sessionStorage.herolist = JSON.stringify(data.split("\n"));
+            let data = await response.text();
+            data = data.split('\n');
+            data.pop(); // new line
+            HEROES = data;
+            sessionStorage.herolist = JSON.stringify(data);
             displayHero();
         }
     }
