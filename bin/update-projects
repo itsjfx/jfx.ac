@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -eu -o pipefail
+
+USER=itsjfx
+
+token="$(gh auth token)" # need token to avoid rate limits
+
+_curl() { curl -sS --fail-with-body -H "Authorization: Bearer $token" "$@"; }
+
+cat <<EOF
+---
+title: Projects
+layout: page
+---
+
+My GitHub repositories
+
+* Generated with [bin/update-projects](https://github.com/itsjfx/jfx.ac/blob/master/bin/update-projects)
+* Last updated: \`$(date --utc)\`
+
+EOF
+
+# i don't have more than 200 repos
+repos="$(_curl "https://api.github.com/users/$USER/repos?per_page=200" | jq -re '.[].name' | while IFS= read -r repo; do
+    data="$(_curl "https://api.github.com/repos/$USER/$repo")"
+    <<<"$data" jq -ce '{
+        "name": "[\(.name | @html)](\(.html_url | @html))" | @html,
+        "description": .description | @html,
+        "language": (.language | tostring | ascii_downcase | @html),
+        "stars": .stargazers_count | @html,
+        "last updated": .pushed_at | @html,
+        "fork": (if .parent.full_name != null then "[\(.parent.full_name | @html)](\(.parent.html_url | @html))" | @html else null end),
+    }'
+done)"
+echo "## Top languages"
+echo
+<<<"$repos" jq -rn '
+  reduce inputs as $item ({}; .[$item.language // "unknown"] += 1)
+  | to_entries
+  | sort_by(-.value)
+  | map("1. \(.key): \(.value)")
+  | .[]
+'
+echo
+echo "## Repositories"
+echo
+echo "Sorted by last updated"
+echo
+<<<"$repos" dsv fromjson | dsv sort 'last updated' -r | dsv tomarkdown
