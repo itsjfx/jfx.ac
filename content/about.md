@@ -7,45 +7,47 @@ layout: page
 
 Hi! My name is **Thomas** or **Tom** for short.
 
-I'm based in Australia, and currently work as a DevOps engineer touching Linux &
-AWS.
+I'm based in Australia and currently work as a Software/DevOps Engineer touching
+TypeScript, Python, Linux and AWS.
 
-My job is mostly solving interesting problems, mentoring others, and writing
-scripts/automations so myself and others spend less time doing mundane things.
+At work I solve interesting problems, mentor others, and write scripts so people
+waste less time.
 
 I've been programming since I was a kid writing
-[Batch](https://en.wikipedia.org/wiki/Batch_file), and websites in [HTML](https://en.wikipedia.org/wiki/HTML) & [PHP](https://en.wikipedia.org/wiki/PHP).
+[Batch](https://en.wikipedia.org/wiki/Batch_file), and websites in
+[HTML](https://en.wikipedia.org/wiki/HTML) &
+[PHP](https://en.wikipedia.org/wiki/PHP).
 
-The first language I spent a lot of time learning was
-[Pawn](https://www.compuphase.com/pawn/pawn.htm), which had C-like syntax,
-before moving onto learning Python 2. I've been using Node since Node 4 
-and enjoyed watching JavaScript/ECMAScript mature over time.
+The first language I spent a lot of time with was
+[Pawn](https://www.compuphase.com/pawn/pawn.htm), then Python 2. I
+started using Node.js when Node 4 released and have enjoyed watching
+JavaScript/ECMAScript mature over time.
 
-Now days I enjoy doing things in TypeScript, Python & Bash.
+Now days I enjoy writing things in TypeScript/Node, Python & Bash.
 
-I have a keen interest in reverse-engineering, and using this skill to make
-things do things they're not supposed to do, or building wrappers around things
-to make them nicer to interact with.
+I have a keen interest in reverse-engineering and using this skill to learn how
+things work, make things do things they're not supposed to do, and wrapping
+things to make them nicer to interact with.
 
 I previously worked on [SteamLevels.com](https://steamlevels.com) as the main
-developer before working full-time. Now days I try my best to
-make sure it's running OK.
+developer before working full-time. Now days I try my best to make sure it's
+running OK.
 
 Most of my personal projects are on my [GitHub](https://github.com/itsjfx). I
 try to put as much things there as possible.
 
-In my personal time I also listen to music, watch lots of movies, go to the gym,
-game, work on my dotfiles, or learn about new tech.
+In my personal time I listen to music, watch lots of movies, go to the gym,
+game, work on my [dotfiles](https://github.com/itsjfx/dotfiles), or learn about
+new tech.
 
 As for where `jfx` came from, I thought it looked *aesthetically pleasing* and
 cool, so I used it one day and it's stuck ever since.
 
 ## This website
 
-This website is written in [Hugo](https://gohugo.io) and is designed to be as
-light as possible (with minimal JavaScript!). I'm still undecided on the site's
-design, so I've gone with the most plain thing possible (maybe too plain!) and
-I'll build it up.
+This website is written in [Hugo](https://gohugo.io) and designed to be as light
+as possible with minimal JavaScript. I'm still figuring out a design so
+things are very plain at the moment :)
 
 The source code is [available here](https://github.com/itsjfx/jfx.ac).
 
