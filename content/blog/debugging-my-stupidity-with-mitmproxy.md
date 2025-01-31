@@ -52,7 +52,7 @@ First we need to start capturing traffic. I have an alias that runs `mitmdump --
 
 Next, we need Neovim to send its traffic through the proxy, and also make sure Neovim trusts the SSL certificate for `mitmproxy`. I have a script [in my dotfiles called mitmwrap](https://github.com/itsjfx/dotfiles/blob/master/bin/mitmwrap) for this.
 
-The usage is `mitmwrap [MITM_ARGS] PROGRAM [ARGS]`. It currently has two modes: setting the `HTTP_PROXY` variables to point to my `mitmproxy`, or using `proxychains` to force an application to use `mitmproxy`. I plan on adding [tsocks](https://github.com/zouguangxian/tsocks) support later.
+The usage is `mitmwrap [MITM_ARGS] PROGRAM [ARGS]`. It currently has two modes: setting the `HTTP_PROXY` variables to point to my `mitmproxy`, or using `proxychains` to force an application to use `mitmproxy`. I plan on adding [graftcp](https://github.com/hmgle/graftcp) support later.
 
 The script attempts to [set common environment variables](https://github.com/itsjfx/dotfiles/blob/2e76936d6f4f01cc7d3ab840dac9c2a438d6d03f/bin/mitmwrap#L38) used by programs to look up the systems SSL store. I point these to the `mitmproxy` SSL certificate. Lastly, it runs the program in a lightweight container using [bubblewrap](https://github.com/containers/bubblewrap) , with `/etc/ssl/certs/ca-certificates.crt` mounted to our `mitmproxy` certificate in case the program does not use any of those earlier environment variables.
 
