@@ -2,7 +2,7 @@
 layout: post
 title: VS Code to Neovim
 date: 2024-09-15
-tags: [robot, vacuum, hacking, root]
+tags: [neovim, vscode]
 ---
 
 I decided to stop using VS Code completely and see how long I could use Neovim. It's been 5 weeks and so far it's been great. I wish I'd done it earlier. 

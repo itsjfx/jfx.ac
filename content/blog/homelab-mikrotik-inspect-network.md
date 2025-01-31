@@ -2,7 +2,7 @@
 layout: post
 title: Homelab & Mikrotik inspection network
 date: 2024-07-31
-tags: [homelab, mikrotik, iot, inspection]
+tags: [homelab, mikrotik, iot, inspection, mitmproxy]
 ---
 
 ## Introduction
