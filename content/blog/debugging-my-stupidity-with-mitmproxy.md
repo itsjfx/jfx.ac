@@ -137,3 +137,5 @@ At the end of the day I decided not to continue using `lsp_lines.nvim`, as in ce
 
 * <https://jvns.ca/blog/2022/06/28/some-notes-on-bubblewrap>
 * <https://wiki.archlinux.org/title/Bubblewrap>
+* <https://mitmproxy.org/>
+* <https://github.com/itsjfx/dotfiles/blob/master/bin/mitmwrap>
