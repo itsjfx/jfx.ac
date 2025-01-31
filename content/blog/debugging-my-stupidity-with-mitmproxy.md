@@ -13,7 +13,7 @@ I opened up ChatGPT and had a quick conversation on which plugins were available
 
 ## The problem
 
-The plugin my colleague showed me was [lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim). It looks like this: {{< image src="/assets/blog/debugging-with-mitmproxy/lsp_lines.png" >}}
+The plugin my colleague showed me was [lsp_lines.nvim](https://git.sr.ht/~whynothugo/lsp_lines.nvim). It looks like this: {{< image src="/assets/blog/debugging-my-stupidity-with-mitmproxy/lsp_lines.png" >}}
 
 I looked at the README and was convinced to try it out, so I asked ChatGPT to "help me install `lsp-lines.nvim`".
 
@@ -30,7 +30,7 @@ I eyeballed the README for the project and it looked OK, so I slapped it in my N
 
 After restarting Neovim, I got a HTTP 403 error during cloning the repository from Sourcehut.
 
-{{< image src="/assets/blog/debugging-with-mitmproxy/bad-clone.png" >}}
+{{< image src="/assets/blog/debugging-my-stupidity-with-mitmproxy/bad-clone.png" >}}
 
 Not what I was expecting. I had no clue why Sourcehut would give me a 403 for a repository that clearly existed! It couldn't be SSH keys as I'd specified a HTTP URL. My first thought was Lazy was appending `.git` to the URL which works on GitHub but not on Sourcehut.
 
@@ -74,11 +74,11 @@ Bonus from today: I used the script to troubleshoot how [aider](https://github.c
 
 `mitmdump` gave pretty output in the console, but I still couldn't figure it out. It looked like the URL  was formed well.
 
-{{< image src="/assets/blog/debugging-with-mitmproxy/bad.png" >}}
+{{< image src="/assets/blog/debugging-my-stupidity-with-mitmproxy/bad.png" >}}
 
 I also ran the `git clone` that worked earlier via `mitmwrap` and captured the traffic, and the request looked identical, except it had a 200 response code.
 
-{{< image src="/assets/blog/debugging-with-mitmproxy/good.png" >}}
+{{< image src="/assets/blog/debugging-my-stupidity-with-mitmproxy/good.png" >}}
 
 Generally the console output is pretty helpful, but I knew something _had_ to be different, so I decided to look at the HAR file. I finally got to the bottom of it after running this command:
 
@@ -131,7 +131,7 @@ I hope this story encourages you to brush up your scripts and keep them around i
 
 At the end of the day I decided not to continue using `lsp_lines.nvim`, as in certain repositories it was moving lines around a lot and got annoying. I may use it again in the future with a toggle, but the default diagnostic view from Neovim is fine with me for now. I really wasted my time.
 
-{{< image src="/assets/blog/debugging-with-mitmproxy/default.png" >}}
+{{< image src="/assets/blog/debugging-my-stupidity-with-mitmproxy/default.png" >}}
 
 ## See also
 
