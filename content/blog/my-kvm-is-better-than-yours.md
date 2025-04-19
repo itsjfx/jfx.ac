@@ -68,7 +68,7 @@ There's a ton of software based implementations of MCCS via DDU on the internet.
 
 With a simple shell command, I could set my monitor to HDMI for my work laptop: `monitorcontrol --monitor=2 --set-input-source HDMI1`
 
-The best part is this is completely free, so you do not need to pay for another device. The only thing is multiple cables for each of your displays and devices so you can switch between inputs.
+The best part is this is completely free, so you do not need to pay for another device. You only need cables for each display and devices so you can switch between inputs.
 
 ## Integrating USB and Display
 
