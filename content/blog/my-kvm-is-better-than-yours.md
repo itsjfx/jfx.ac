@@ -112,6 +112,10 @@ This setup requires you to press the button on the KVM, but saves you from needi
 
 This will also only work on Linux due to `udev`, but I'm sure there's a similar implementation for other operating systems.
 
+## Conclusion
+
+A big factor of working from home is being comfortable, so it pays to have a setup to switch between your devices. You don't need to perform brain surgery on your USB hub to be happy. If your company gives you an allowance for equipment, definitely try out a switchable USB hub with a button. I highly recommend the UGREEN one.
+
 ## The code
 
 The code for my Stream Deck is available here: <https://github.com/itsjfx/dotfiles/blob/24a6e418244909d059a4d057645af0bb1f6996bc/lib/streamdeck.py#L144-L156>
