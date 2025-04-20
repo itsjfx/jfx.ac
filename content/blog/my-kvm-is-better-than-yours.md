@@ -18,14 +18,14 @@ Without giving away _too much_ of the implementation (don't worry, I'll tell you
 * Supports HDMI/DisplayPort to any supported resolution and refresh rate of the monitor
     * My 240hz 1080p monitor works great
 * No display disconnecting
-    * On Windows, if you disconnect a display, windows get moved to other monitors. This is incredibly annoying
+    * On Windows, if you disconnect a display, windows get moved to other monitors. This is incredibly annoying and does not happen on my setup
 * Relatively quick
 * Cheap
     * My end costs were $40 AUD
 
 Things I wanted to avoid:
 * Software-based KVM solutions - my home and work machines should not be aware of each other. I don't feel comfortable sending keystrokes across machines.
-* A HDMI/DisplayPort based monitor switcher
+* An external monitor switcher hub device
     * Mainly due to the lack of 240hz support and display disconnecting
 * Spending lots of money
     * How do I justify the need to spend $300 on a high quality KVM to my company? or myself?
@@ -68,11 +68,11 @@ There's a ton of software based implementations of MCCS via DDU on the internet.
 
 With a simple shell command, I could set my monitor to HDMI for my work laptop: `monitorcontrol --monitor=2 --set-input-source HDMI1`
 
-The best part is this is completely free, so you do not need to pay for another device. You only need cables for each display and devices so you can switch between inputs.
+The best part is this is completely free, so you do not need to pay for another device. You only need cables for each display and device.
 
 ## Integrating USB and Display
 
-I wanted to press a button for a machine on my Stream Deck and toggle both the input and display at the same time. To do this, I use this [third-party Stream Deck Python library](https://github.com/abcminiuser/python-elgato-streamdeck) as Elgato's Stream Deck software doesn't work on Linux (shakes fist).
+I wanted to add custom buttons to my Stream Deck which allowed switching between my devices. To do this, I use this [third-party Stream Deck Python library](https://github.com/abcminiuser/python-elgato-streamdeck) as Elgato's Stream Deck software doesn't work on Linux (shakes fist).
 
 I added two buttons on my StreamDeck, one for switching to my laptop, and one for switching to my desktop. Both buttons effectively:
 * Send a web request to my Raspberry PI Pico to toggle the switch
@@ -80,13 +80,13 @@ I added two buttons on my StreamDeck, one for switching to my laptop, and one fo
 
 I also created a third button that toggles only the USB device.
 
-The reason why I wanted a button for each machine is cause sometimes displays get disconnected due to device sleep or cables slipping, so I had the need to explicitly select which device to switch to.
+The reason why I wanted a button for each machine and not a toggle button - is cause displays get disconnected due to device sleep or cables slipping, so I had the need to explicitly select which device to switch to.
 
 Unfortunately, I had no way of keeping track of which USB device my KVM connected to. This is cause the Pico has no state and grounds the pin whenever it receives a web request. I thought about tapping into the light on my KVM and using that for state management, then I realised there's a simpler solution.
 
 My Stream Deck is always directly connected to my desktop (not via KVM), and my desktop machine is always on. Due to this I could cheat a little.
 
-When I press the button on my Stream Deck, my script runs `lsusb` and checks whether the USB hub is listed as a connected device. If I press the button to switch to my desktop, and the USB hub is connected, then there's no need to call my Pico API to toggle the KVM as the USB hub is connected to the correct device. If the USB hub did not appear in `lsusb`, then this would mean my USB hub was connected to my laptop, so my Stream Deck code correctly makes a web request to my Pico API to toggle the KVM.
+When I press the button on my Stream Deck, my script runs `lsusb` and checks whether the USB hub is listed as a connected device. If I press the button to switch to my desktop, and the USB hub is connected, then there's no need to call my Pico API to toggle the USB hub as the USB hub is connected to the correct device. If the USB hub did not appear in `lsusb`, then this would mean my USB hub was connected to my laptop, so my Stream Deck code correctly makes a web request to my Pico API to toggle the USB hub.
 
 Cause of this cheat, I had a way to reliably detect whether the USB device was connected to the right PC or not, and only switch when appropriate. I combined this with `monitorcontrol`, and with a single button press I have a way to switch my display and USB devices.
 
@@ -96,7 +96,7 @@ Cause of this cheat, I had a way to reliably detect whether the USB device was c
 
 I reflected on my KVM setup and I realised that there is a fairly simple alternative which does not require soldering or taking apart the UGREEN KVM.
 
-Using [udev rules](https://en.wikipedia.org/wiki/Udev), you can detect when a device is connected or disconnected from your Linux machine and run a shell command. You can create these rules on a single "main" machine - and listen to events on the USB hub device. When disconnected, you could run `monitorcontrol` to switch the display to your other device - and when connected switch back to the main machines display input.
+Using [udev rules](https://en.wikipedia.org/wiki/Udev), you can detect when a device is connected or disconnected from your Linux machine and run a shell command. You can create these rules on a single "main" machine - and listen to events on the USB hub device. When disconnected, you could run `monitorcontrol` to switch the display input to your other machine - and when connected switch back to the main machines display input.
 
 For the UGREEN KVM, here are two rules which implement the above:
 
@@ -108,13 +108,17 @@ ACTION=="remove", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ENV{PRODUCT}=="5
 
 This is what works for me as I have `monitorcontrol` installed in my local users Python installation.
 
-This setup requires you to press the button on the KVM, but saves you from needing to switch monitor input. It also saves you from soldering!
+This setup requires you to press the button on the KVM, but saves you from needing to switch your monitor input yourself. It also saves you from soldering!
 
 This will also only work on Linux due to `udev`, but I'm sure there's a similar implementation for other operating systems.
 
 ## Conclusion
 
 A big factor of working from home is being comfortable, so it pays to have a setup to switch between your devices. You don't need to perform brain surgery on your USB hub to be happy. If your company gives you an allowance for equipment, definitely try out a switchable USB hub with a button. I highly recommend the UGREEN one.
+
+There is no financial cost of using free software like `monitorcontrol` - the only cost is your time. Try it out on your display and perhaps create a key-binding or two to switch between your display inputs.
+
+I also enjoyed the opportunity to learn more about electronics and use a Pico to solve a problem. I'm not the strongest electronics person so this was a great learning project. Thank you to all the friends who helped out.
 
 ## The code
 
