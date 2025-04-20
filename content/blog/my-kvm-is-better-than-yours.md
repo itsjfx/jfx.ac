@@ -41,13 +41,13 @@ I bought the popular [UGREEN USB 3.0 Switch Selector](https://www.amazon.com.au/
 
 The USB hub comes with a toggle button on the top and no API. This worked well for a while, but I got tired of leaning across the table to press the button. I wanted it to have an API so I could switch it via my [Stream Deck](https://www.elgato.com/ww/en/s/welcome-to-stream-deck).
 
-I bought a second switch, pulled it apart, and saw that the PCB is simple. There's a tactile switch which grounds a circuit momentarily to "toggle" which machine the device is serving USB to. Playing around with a multi-meter I was able to toggle the connected machine easily.
+I bought a second USB hub, pulled it apart, and saw the electronics are simple. There's a tactile switch which grounds a circuit momentarily to "toggle" which machine the device is serving USB to. Playing around with a multi-meter I was able to toggle the connected machine easily.
 
 {{< image src="/assets/blog/kvm-better/disassembled.png" >}}
 
-I had a Raspberry Pico lying around ($10 AUD) so I soldered a cable to the PCB in the spot to ground. I then wrote a simple program to quickly ground a PIN on the board and connected the cable to the board.
+I had a Raspberry Pico lying around ($10 AUD) so I soldered a cable to the PCB in the spot to ground. I then wrote a simple program to quickly ground a pin on the Pico and connected the soldered cable to the Pico.
 
-To my amazement it actually worked:
+To my amazement the program actually worked:
 
 {{< image src="/assets/blog/kvm-better/trial.gif" >}}
 
@@ -55,7 +55,7 @@ Next I wrote a dirty HTTP server, connected it to my WiFi, and I was able to do 
 
 ## Handling Displays
 
-I'd tried an external device for toggling displays, but due to my monitors high refresh rate and Windows freaking out when displays were disconnected I found it not suitable. Luckily, I discovered that it's possible to control displays with software.
+I'd tried an external device for switching between displays, but due to my monitors high refresh rate and Windows freaking out when displays were disconnected I found it not suitable. Luckily, I discovered that it's possible to control displays with software.
 
 
 There's a not well-known protocol called [Display Data Channel (DDU)](https://en.wikipedia.org/wiki/Display_Data_Channel). DDU is essentially a bus that allows for digital communication between a computer display and video card.
