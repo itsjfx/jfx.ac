@@ -145,6 +145,11 @@ article {
     font-size: 0.85rem;
 }
 
+.resizeable {
+    max-width: 100%;
+    height: auto;
+}
+
 .float-img {
     float: right;
     display: inline;
