@@ -58,13 +58,13 @@ Next I wrote a dirty HTTP server, connected it to my WiFi, and I was able to do 
 I'd tried an external device for switching between displays, but due to my monitors high refresh rate and Windows freaking out when displays were disconnected I found it not suitable. Luckily, I discovered that it's possible to control displays with software.
 
 
-There's a not well-known protocol called [Display Data Channel (DDU)](https://en.wikipedia.org/wiki/Display_Data_Channel). DDU is essentially a bus that allows for digital communication between a computer display and video card.
+There's a not well-known protocol called [Display Data Channel (DDC)](https://en.wikipedia.org/wiki/Display_Data_Channel) developed by the Video Electronics Standards Association (VESA). DDC is essentially a bus that allows for digital communication between a computer display and video card.
 
-Separately, there's another protocol called [Monitor Control Command Set (MCCS)](https://en.wikipedia.org/wiki/Monitor_Control_Command_Set) which allows for controlling the properties of a monitor. Using DDU as a data channel, you can send MCCS messages bidirectionally between a computer and monitor.
+Separately, there's another protocol called [Monitor Control Command Set (MCCS)](https://en.wikipedia.org/wiki/Monitor_Control_Command_Set) which allows for controlling the properties of a monitor. Using DDC as a data channel, you can send MCCS messages bidirectionally between a computer and monitor.
 
 With MCCS, you can do things like adjust the brightness or contrast of your monitor - but even more useful, you can set the current input of the monitor! The same as pressing the input button on your monitor yourself.
 
-There's a ton of software based implementations of MCCS via DDU on the internet. I decided to use [monitorcontrol](https://github.com/newAM/monitorcontrol) cause it was written in Python and worked across many platforms.
+There's a ton of software based implementations of MCCS via DDC on the internet. I decided to use [monitorcontrol](https://github.com/newAM/monitorcontrol) cause it was written in Python and worked across many platforms.
 
 With a simple shell command, I could set my monitor to HDMI for my work laptop: `monitorcontrol --monitor=2 --set-input-source HDMI1`
 
