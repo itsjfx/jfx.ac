@@ -7,7 +7,7 @@ disablePathToLower = false
 rssLimit = 10
 
 [permalinks]
-blog = "/blog/:filename"
+blog = "/blog/:contentbasename"
 
 [markup.goldmark.renderer]
 unsafe = true
